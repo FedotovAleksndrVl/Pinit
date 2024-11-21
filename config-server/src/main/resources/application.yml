@@ -1,0 +1,32 @@
+server:
+  port: ${PORT:8888}
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native #тут пишем какой выбрали профиль
+---
+spring:
+  config:
+    activate:
+      on-profile: git # название профиля ниже конфига
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/blabla
+          searchPaths: /tree/master/ms-config-properties/{application}/{profile}
+---
+spring:
+  config:
+    activate:
+      on-profile: native  # название профиля ниже конфига
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: 'C:\Users\20 Соток\IdeaProjects\Pro\config-server\ms-config-properties\client-config\dev'
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
