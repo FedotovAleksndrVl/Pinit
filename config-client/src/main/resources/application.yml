@@ -2,9 +2,7 @@ server:
   port: 8080
 spring:
   config:
-    activate:
-      import: optional:configserver
-      on-profile: dev
+    activate: { import: optional:ConfigServer, on-profile: dev }
   application:
     name: config-client
   cloud:
